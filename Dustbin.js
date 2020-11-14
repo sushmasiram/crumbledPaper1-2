@@ -1,5 +1,5 @@
 class dustbin{
-    constructor(x,y,w,h){
+    constructor(x,y){
      var options = {
          isStatic:true,
          restitution: 0.3,
@@ -8,21 +8,24 @@ class dustbin{
        }
        this.x=x;
        this.y=y;
-       this.w=w;
-       this.h=h;
-       this.body = Bodies.rectangle(this.x,this.y,this.w,this.h, options);
-       World.add(world,this.body);
+       this.w=20;
+       this.h=100;
+       //600, 720,660 -- x; 680,600,600--y
+       this.left = Bodies.rectangle(this.x-60,this.y,20,100, options);
+       this.right = Bodies.rectangle(this.x+60,this.y,20,100, options);
+       this.bottom= Bodies.rectangle(this.x,this.y+80,100,20, options);
+       World.add(world,this.left);
+       World.add(world,this.right);
+       World.add(world,this.bottom);
        this.image=loadImage("images/dustbingreen.png");
     }
 
     display(){
    
-    var paperpos=this.body.position;
-
      push()
-     translate(paperpos.x,paperpos.y)
+     translate(this.x,this.y)
      imageMode(CENTER);
-     image(this.image,0,0,this.w,this.h)
+     image(this.image,0,0,this.h,this.h+20)
      pop()
     }
 }
